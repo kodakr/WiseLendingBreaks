@@ -13,8 +13,7 @@ contract CounterTest is Test {
     WiseLendImplementation wiseLendImplementationContract;
     TokenReturningFalse token;
     address wiseLendUser;
-    uint public constant MINTED = 100_000;
-
+    uint256 public constant MINTED = 100_000;
 
     function setUp() public {
         openzeppelinImplementation = new OZImplementation();
@@ -22,18 +21,16 @@ contract CounterTest is Test {
         token = new TokenReturningFalse();
         wiseLendUser = makeAddr("wiseLendUser");
 
-        token.mint(wiseLendUser,MINTED);
-
+        token.mint(wiseLendUser, MINTED);
     }
 
-    function test_Breaks_On_False_for_Openzeppelin() public {
+    function test_Breaks_On_False_Return_for_Openzeppelin() public {
         vm.expectRevert();
-        openzeppelinImplementation.safeTransferFrom(token, wiseLendUser, address(this), 100);
+        openzeppelinImplementation.safeTransferFrom(token, wiseLendUser, address(this), 100); // Reverts on false!!!
     }
 
-    function test_Breaks_On_False_For_Wiselend() public {
+    function test_Breaks_On_False_Return_For_Wiselend() public {
         vm.expectRevert();
-        wiseLendImplementationContract.safeTransferFrom(address(token), wiseLendUser, address(this), 100);
+        wiseLendImplementationContract.safeTransferFrom(address(token), wiseLendUser, address(this), 100);  // Doesnt Revert as Expected
     }
-   
 }

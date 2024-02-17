@@ -46,13 +46,11 @@ import {SafeERC20} from "openzeppelin-contracts/contracts/token/ERC20/utils/Safe
 contract OZImplementation {
     using SafeERC20 for IERC20; // token.safeTransfer
 
-    function safeTransfer(IERC20 Token, address to, uint value) public {
-       Token.safeTransfer(to,value);
+    function safeTransfer(IERC20 Token, address to, uint256 value) public {
+        Token.safeTransfer(to, value);
     }
 
-    function safeTransferFrom(IERC20 Token, address from,address to, uint value) public {
-        Token.safeTransferFrom(from,to,value);
+    function safeTransferFrom(IERC20 Token, address from, address to, uint256 value) public {
+        Token.safeTransferFrom(from, to, value);
     }
-
-    //function transfer()
 }
